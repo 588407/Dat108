@@ -1,41 +1,17 @@
 package oppg2;
 
 public class Burger {
-	
-	private int contents;
-	private boolean available = false;
-	
-	synchronized public int get() {
-		while (!available) {
-			try {
-				wait();
-				
-			} catch (InterruptedException e) {
-				
-			}
-		}
-		available = false;
-		notifyAll();
-		
-		return contents;
+
+	private static int count;
+
+	private final int id;
+
+	public Burger() {
+		id = ++count;
 	}
-	
-	synchronized public void set(int value) {
-		while (available) {
-			try {
-				wait();
-			} catch (InterruptedException e) {
-				
-			}
-		}
-		available = true;
-		contents = value;
-		notifyAll();
+
+	@Override
+	public String toString() {
+		return String.format("(%s)", id);
 	}
-	
-	
-	
-	
-	
-	
 }
